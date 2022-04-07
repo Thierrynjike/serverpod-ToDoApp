@@ -43,6 +43,14 @@ class _MyHomePageState extends State<MyHomePage> {
   int _action = 0;
   int _taskInd = -1;
   final _formkey = GlobalKey<FormState>();
+
+  @override
+  initState() {
+    super.initState();
+    // Add listeners to this class
+    getTasks();
+  }
+
   Widget texWithStyle(String texte,
       {fontstyle = FontStyle.normal,
       fontweight = FontWeight.normal,
@@ -71,12 +79,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    void getTasks() async {
-      List<dynamic> result = await client.task.findall();
-      setState(() {
-        _tasks = result;
-      });
-    }
 
     Color getColor(Set<MaterialState> states) {
       const Set<MaterialState> interactiveStates = <MaterialState>{
@@ -297,6 +299,13 @@ class _MyHomePageState extends State<MyHomePage> {
     return null;
   }
 
+  Future<void> getTasks() async {
+    Tasks result = await client.task.findall();
+    setState(() {
+      _tasks = result.list;
+    });
+  }
+
   void _taskdb() async {
     // Validate returns true if the form is valid, or false otherwise.
     if (_formkey.currentState!.validate()) {
@@ -315,9 +324,11 @@ class _MyHomePageState extends State<MyHomePage> {
           print(res);
         }
 
+        await this.getTasks();
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Database action Done!')),
         );
+
       } catch (e) {
         print('$e');
       }

@@ -2,7 +2,7 @@ import 'package:talkpod_server/src/generated/protocol.dart';
 import 'package:serverpod/serverpod.dart';
 
 class TaskEndpoint extends Endpoint {
-  Future<String> delete(Session session, myTask) async {
+  Future<String> delete(Session session, Task myTask) async {
     // Delete a single row
     try {
       await Task.deleteRow(session, myTask);
@@ -47,20 +47,17 @@ class TaskEndpoint extends Endpoint {
     }
   }
 
-  Future<List<dynamic>> findall(Session session) async {
+  Future<Tasks> findall(Session session) async {
     try {
-      var tasks = await Task.find(
-        session
-        
-      );
+      Tasks tasks = new Tasks(list: await Task.find(session));
 
       return tasks;
     } catch (e) {
-      return [];
+      return new Tasks(list: []);
     }
   }
 
-  Future<String> display(Session session, task) async {
+  Future<String> display(Session session, Task task) async {
     String out = "Informations de la tâche \n";
     out += "---------------------------------------\n";
 

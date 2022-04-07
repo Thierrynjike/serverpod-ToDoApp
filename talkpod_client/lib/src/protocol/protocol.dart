@@ -11,8 +11,10 @@ import 'dart:typed_data';
 import 'package:serverpod_client/serverpod_client.dart';
 
 import 'task_class.dart';
+import 'tasks_class.dart';
 
 export 'task_class.dart';
+export 'tasks_class.dart';
 export 'client.dart';
 
 class Protocol extends SerializationManager {
@@ -25,5 +27,7 @@ class Protocol extends SerializationManager {
   Protocol() {
     constructors['Task'] = (Map<String, dynamic> serialization) =>
         Task.fromSerialization(serialization);
+    constructors['Tasks'] = (Map<String, dynamic> serialization) =>
+        Tasks.fromSerialization(serialization);
   }
 }

@@ -16,7 +16,7 @@ class _EndpointTask extends EndpointRef {
   _EndpointTask(EndpointCaller caller) : super(caller);
 
   Future<String> delete(
-    dynamic myTask,
+    Task myTask,
   ) async {
     return await caller.callServerEndpoint('task', 'delete', 'String', {
       'myTask': myTask,
@@ -47,13 +47,12 @@ class _EndpointTask extends EndpointRef {
     });
   }
 
-  Future<List<dynamic>> findall() async {
-    return await caller
-        .callServerEndpoint('task', 'findall', 'List<dynamic>', {});
+  Future<Tasks> findall() async {
+    return await caller.callServerEndpoint('task', 'findall', 'Tasks', {});
   }
 
   Future<String> display(
-    dynamic task,
+    Task task,
   ) async {
     return await caller.callServerEndpoint('task', 'display', 'String', {
       'task': task,

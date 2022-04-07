@@ -27,7 +27,7 @@ class Endpoints extends EndpointDispatch {
           name: 'delete',
           params: {
             'myTask': ParameterDescription(
-                name: 'myTask', type: dynamic, nullable: false),
+                name: 'myTask', type: Task, nullable: false),
           },
           call: (Session session, Map<String, dynamic> params) async {
             return (endpoints['task'] as TaskEndpoint).delete(
@@ -87,8 +87,8 @@ class Endpoints extends EndpointDispatch {
         'display': MethodConnector(
           name: 'display',
           params: {
-            'task': ParameterDescription(
-                name: 'task', type: dynamic, nullable: false),
+            'task':
+                ParameterDescription(name: 'task', type: Task, nullable: false),
           },
           call: (Session session, Map<String, dynamic> params) async {
             return (endpoints['task'] as TaskEndpoint).display(
