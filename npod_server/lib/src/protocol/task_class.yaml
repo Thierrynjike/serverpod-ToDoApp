@@ -1,0 +1,7 @@
+class: Task
+table: task
+fields:
+  name: String
+  description: String
+  creationDate: DateTime?
+  assignedTo: String
