@@ -176,7 +176,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   decoration: BoxDecoration(
                     border: Border.all(color: color),
                   ),
-                  child: _taskInd == -1
+                  child: _tasks.length == 0
                       ? texWithStyle(
                           "So Empty! create new tasks to see them here!")
                       : ListView.builder(
